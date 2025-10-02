@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:your_cinema/features/movies/data/models/movie.dart';
+import 'package:your_cinema/features/movies/domain/entities/movie.dart';
 
 class MoviePoster extends StatelessWidget {
   const MoviePoster({super.key, required this.movie});

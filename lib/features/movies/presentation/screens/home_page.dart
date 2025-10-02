@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:your_cinema/features/movies/data/models/movie.dart';
+import 'package:your_cinema/features/movies/domain/entities/movie.dart';
+import 'package:your_cinema/features/movies/presentation/providers/trending_movies_provider.dart';
 import 'package:your_cinema/features/movies/presentation/widgets/movie_poster.dart';
-import 'package:your_cinema/features/movies/providers/trending_movies_provider.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});

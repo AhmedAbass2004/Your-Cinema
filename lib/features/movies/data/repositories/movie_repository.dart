@@ -1,18 +1,15 @@
-import 'package:your_cinema/features/movies/data/models/movie.dart';
-import 'package:your_cinema/services/api/tmdb_api.dart';
+import 'package:your_cinema/features/movies/data/data_sources/tmdb_api.dart';
+import 'package:your_cinema/features/movies/domain/entities/movie.dart';
+import 'package:your_cinema/features/movies/domain/repositories/movie_repository.dart';
 
-class MovieRepository {
-  List<Movie>? _trendingMovies;
-  final TmdbApi api = TmdbApi();
+class MovieRepositoryImpl extends MovieRepository {
+  final TmdbApi api;
 
-  Future<List<Movie>> get trendingMovies async {
-    if (_trendingMovies != null) {
-      return _trendingMovies!;
-    }
-    const String endpoint = "trending/movie/day?language=en-US";
-    final response = await api.fetchData(endpoint);
-    final List results = response['results'];
-    _trendingMovies = results.map((e) => Movie.fromJson(e)).toList();
-    return _trendingMovies!;
+  MovieRepositoryImpl({required this.api});
+
+  @override
+  Future<List<Movie>> getTrendingMovies() async {
+    const endpoint = '/trending/movie/day';
+    return await api.getTrendingMovies(endpoint);
   }
 }
