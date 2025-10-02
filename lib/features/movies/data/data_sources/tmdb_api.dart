@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:your_cinema/core/constants.dart';
-import 'package:your_cinema/features/movies/data/models/movie.dart';
+import 'package:your_cinema/features/movies/data/models/movie_model.dart';
 
 class TmdbApi {
   final String baseUrl = "https://api.themoviedb.org/3";
