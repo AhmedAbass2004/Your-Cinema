@@ -1,3 +1,5 @@
+import 'package:your_cinema/core/constants/api_constants.dart';
+import 'package:your_cinema/features/movies/data/models/producer_model.dart';
 import 'package:your_cinema/features/movies/domain/entities/movie.dart';
 
 class MovieModel extends Movie {
@@ -6,34 +8,42 @@ class MovieModel extends Movie {
     required super.title,
     required super.overview,
     required super.posterPath,
-    required super.language,
-    required super.genreIds,
-    required super.releaseDate,
+    required super.backdropPath,
     required super.voteAverage,
     required super.voteCount,
+    required super.releaseDate,
+    super.status,
+    super.producers,
+    super.homepage,
+    super.tagline,
+    super.runtime,
   });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
-    String id = json['id'].toString(),
-        title = json['title'] ?? 'No Title',
-        overview = json['overview'] ?? 'No Overview',
-        posterPath = json['poster_path'] ?? '',
-        language = json['original_language'] ?? 'N/A',
-        releaseDate = json['release_date'] ?? 'N/A';
-    double voteAverage = (json['vote_average'] ?? 0).toDouble();
-    int voteCount = json['vote_count'] ?? 0;
-
-    List<int> genreIds = List<int>.from(json['genre_ids'] ?? []);
-    return MovieModel(
-      id: id,
-      title: title,
-      overview: overview,
-      posterPath: posterPath,
-      language: language,
-      genreIds: genreIds,
-      releaseDate: releaseDate,
-      voteAverage: voteAverage,
-      voteCount: voteCount,
-    );
+    final List<ProducerModel> producersList =
+        json['production_companies'] == null
+        ? []
+        : List<ProducerModel>.from(
+            (json['production_companies'] as List).map(
+              (x) => ProducerModel.fromJson(x),
+            ),
+          );
+    try {
+      return MovieModel(
+        id: json['id'],
+        title: json['title'],
+        overview: json['overview'],
+        posterPath: kImageBaseUrl + json['poster_path'],
+        backdropPath: kImageBaseUrl + json['backdrop_path'],
+        releaseDate: json['release_date'],
+        status: json['status'],
+        runtime: json['runtime'],
+        voteAverage: (json['vote_average']).toDouble(),
+        voteCount: json['vote_count'],
+        producers: producersList,
+      );
+    } catch (e) {
+      throw Exception('Error parsing MovieModel: $e');
+    }
   }
 }
