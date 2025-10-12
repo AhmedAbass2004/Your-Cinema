@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:your_cinema/features/authentication/data/models/user_account_model.dart';
+import 'package:your_cinema/features/authentication/domain/entities/login_credentials.dart';
 import 'package:your_cinema/features/authentication/domain/entities/user_params.dart';
 
 class FirebaseAuthDataSource {
@@ -17,13 +18,11 @@ class FirebaseAuthDataSource {
     return UserAccountModel.fromFirebase(user: user, params: params);
   }
 
-  Future<UserAccountModel> loginUser(UserParams params) async {
-    UserCredential credential = await auth.signInWithEmailAndPassword(
+  Future<void> loginUser(LoginCredentials params) async {
+    await auth.signInWithEmailAndPassword(
       email: params.email,
       password: params.password,
     );
-    User user = credential.user!;
-    return UserAccountModel.fromFirebase(user: user, params: params);
   }
 
   Future<void> logOutUser() async {

@@ -1,5 +1,4 @@
-import 'package:your_cinema/features/authentication/domain/entities/user_account.dart';
-import 'package:your_cinema/features/authentication/domain/entities/user_params.dart';
+import 'package:your_cinema/features/authentication/domain/entities/login_credentials.dart';
 import 'package:your_cinema/features/authentication/domain/repositories/users_repository.dart';
 
 class LoginUsecase {
@@ -7,7 +6,7 @@ class LoginUsecase {
 
   LoginUsecase(this.repository);
 
-  Future<UserAccount> call(UserParams params) async {
+  Future<void> call(LoginCredentials params) async {
     return repository.loginUser(params);
   }
 }

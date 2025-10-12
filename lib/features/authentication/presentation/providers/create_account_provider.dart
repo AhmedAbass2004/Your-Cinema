@@ -4,7 +4,7 @@ import 'package:your_cinema/features/authentication/domain/usecases/sing_up_usec
 
 import 'package:your_cinema/core/helpers/dependency_container.dart' as dc;
 
-final singupUseCaseProvider = Provider<SignUpUsecase>((ref) {
+final _singupUseCaseProvider = Provider<SignUpUsecase>((ref) {
   return dc.getIt<SignUpUsecase>();
 });
 
@@ -12,6 +12,6 @@ final createAccountProvider = FutureProvider.family<void, UserParams>((
   ref,
   params,
 ) async {
-  final usecase = ref.read(singupUseCaseProvider);
+  final usecase = ref.read(_singupUseCaseProvider);
   await usecase(params);
 });

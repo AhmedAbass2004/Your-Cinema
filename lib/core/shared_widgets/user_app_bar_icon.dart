@@ -16,7 +16,7 @@ class UserAppBarIcon extends ConsumerWidget {
             user.avatarPath != null &&
             user.avatarPath!.isNotEmpty) {
           return CircleAvatar(
-            backgroundImage: NetworkImage(user.avatarPath!),
+            backgroundImage: AssetImage(user.avatarPath!),
             radius: 16,
           );
         } else {

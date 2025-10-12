@@ -1,6 +1,7 @@
 import 'package:your_cinema/features/authentication/data/data_sources/firebase_auth_data_source.dart';
 import 'package:your_cinema/features/authentication/data/data_sources/firebase_store_data_source.dart';
 import 'package:your_cinema/features/authentication/data/models/user_account_model.dart';
+import 'package:your_cinema/features/authentication/domain/entities/login_credentials.dart';
 import 'package:your_cinema/features/authentication/domain/entities/user_params.dart';
 
 import '../../domain/repositories/users_repository.dart';
@@ -22,7 +23,7 @@ class UsersRepositoryImpl implements UsersRepository {
   }
 
   @override
-  Future<UserAccountModel> loginUser(UserParams params) async {
+  Future<void> loginUser(LoginCredentials params) async {
     return firebaseAuthDataSource.loginUser(params);
   }
 
@@ -38,13 +39,14 @@ class UsersRepositoryImpl implements UsersRepository {
 
   @override
   Stream<UserAccountModel?> getCurrentUser() {
-    return firebaseAuthDataSource.getCurrentUser().map((user) {
+    return firebaseAuthDataSource.getCurrentUser().asyncMap((user) async {
       if (user == null) return null;
+      final userModel = await firebaseStoreDataSource.getUserDetails(user.uid);
       return UserAccountModel(
-        id: user.uid,
-        email: user.email ?? '',
-        username: user.displayName ?? '',
-        avatarPath: user.photoURL,
+        id: userModel?.id ?? '',
+        email: userModel?.email ?? '',
+        username: userModel?.username ?? '',
+        avatarPath: userModel?.avatarPath ?? '',
       );
     });
   }

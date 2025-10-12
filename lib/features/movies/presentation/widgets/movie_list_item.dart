@@ -12,7 +12,7 @@ class MovieListItem extends StatelessWidget {
       margin: EdgeInsets.only(left: 8),
       width: 150,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.onSurface,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -45,10 +45,10 @@ class MovieListItem extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: 46,
+                  height: 50,
                   child: Text(
                     show.title,
-                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                    style: const TextStyle(color: Colors.white, fontSize: 14),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),

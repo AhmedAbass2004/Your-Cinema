@@ -18,16 +18,37 @@ class UserDetailsScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            CircleAvatar(
+              radius: 80,
+              backgroundImage: AssetImage(
+                user.avatarPath ?? 'assets/user_avatars/user_avatar_0.jpg',
+              ),
+            ),
+            SizedBox(height: 16),
             Text(
-              'User ID: ${user.id}',
+              user.username,
               style: const TextStyle(fontSize: 16, color: Colors.white),
             ),
             const SizedBox(height: 8),
-            Text(
-              'Email: ${user.email}',
-              style: const TextStyle(fontSize: 16, color: Colors.white),
+            ListTile(
+              leading: const Icon(Icons.email),
+              title: Text(
+                'Email: ${user.email}',
+                style: const TextStyle(fontSize: 16),
+              ),
+            ),
+
+            ListTile(
+              leading: const Icon(Icons.bookmark),
+              title: Text('Watch List', style: const TextStyle(fontSize: 16)),
+            ),
+
+            const SizedBox(height: 8),
+            ElevatedButton(
+              onPressed: onLogOut,
+              child: const Text('Edit Profile'),
             ),
             const SizedBox(height: 8),
             ElevatedButton(onPressed: onLogOut, child: const Text('Log Out')),

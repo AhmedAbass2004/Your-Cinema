@@ -7,6 +7,7 @@ import 'package:your_cinema/features/authentication/data/repositories/users_repo
 import 'package:your_cinema/features/authentication/domain/repositories/users_repository.dart';
 import 'package:your_cinema/features/authentication/domain/usecases/get_current_user_use_case.dart';
 import 'package:your_cinema/features/authentication/domain/usecases/log_out_user_use_case.dart';
+import 'package:your_cinema/features/authentication/domain/usecases/login_usecase.dart';
 import 'package:your_cinema/features/authentication/domain/usecases/sing_up_usecase.dart';
 import 'package:your_cinema/features/movies/data/data_sources/tmdb_api.dart';
 import 'package:your_cinema/features/movies/data/repositories/movie_repository.dart';
@@ -67,6 +68,10 @@ void init() {
   getIt.registerLazySingleton<SignUpUsecase>(
     () => SignUpUsecase(repository: getIt()),
   );
+
+  // - Login User
+
+  getIt.registerLazySingleton<LoginUsecase>(() => LoginUsecase(getIt()));
 
   // - Log Out User
 

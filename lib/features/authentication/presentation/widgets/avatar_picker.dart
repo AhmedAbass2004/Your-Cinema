@@ -9,7 +9,7 @@ class AvatarPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: CircleAvatar(radius: 60, backgroundImage: AssetImage(image)),
+      child: CircleAvatar(radius: 80, backgroundImage: AssetImage(image)),
     );
   }
 }

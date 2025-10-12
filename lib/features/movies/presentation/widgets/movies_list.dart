@@ -22,7 +22,7 @@ class MoviesList extends StatelessWidget {
       children: [
         SectionHeadlineText(text: headline),
         SizedBox(
-          height: 320,
+          height: 332,
           child: topRatedMovies.when(
             data: (movies) {
               return ListView.builder(
@@ -32,7 +32,7 @@ class MoviesList extends StatelessWidget {
               );
             },
             error: (error, stackTrace) => Text(error.toString()),
-            loading: () => CircularProgressIndicator(),
+            loading: () => const Center(child: CircularProgressIndicator()),
           ),
         ),
       ],

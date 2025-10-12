@@ -20,4 +20,22 @@ class FirebaseStoreDataSource {
       log("Error storing user details: $e");
     }
   }
+
+  Future<UserAccountModel?> getUserDetails(String id) async {
+    try {
+      final doc = await firestore.collection("users").doc(id).get();
+      if (doc.exists && doc.data() != null) {
+        return UserAccountModel(
+          id: doc.id,
+          email: doc.data()!['email'] ?? '',
+          username: doc.data()!['username'] ?? '',
+          avatarPath: doc.data()!['avatarPath'] ?? '',
+        );
+      }
+      return null;
+    } catch (e) {
+      log("Error getting user details: $e");
+      return null;
+    }
+  }
 }
