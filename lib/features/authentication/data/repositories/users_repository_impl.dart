@@ -1,0 +1,53 @@
+import 'package:your_cinema/features/authentication/data/data_sources/firebase_auth_data_source.dart';
+import 'package:your_cinema/features/authentication/data/data_sources/firebase_store_data_source.dart';
+import 'package:your_cinema/features/authentication/data/models/user_account_model.dart';
+import 'package:your_cinema/features/authentication/domain/entities/login_credentials.dart';
+import 'package:your_cinema/features/authentication/domain/entities/user_params.dart';
+
+import '../../domain/repositories/users_repository.dart';
+
+class UsersRepositoryImpl implements UsersRepository {
+  UsersRepositoryImpl({
+    required this.firebaseAuthDataSource,
+    required this.firebaseStoreDataSource,
+  });
+
+  final FirebaseAuthDataSource firebaseAuthDataSource;
+  final FirebaseStoreDataSource firebaseStoreDataSource;
+
+  @override
+  Future<UserAccountModel> createUserAccount(UserParams params) async {
+    final user = await firebaseAuthDataSource.createUserAccount(params);
+    await storeUserDetails(user);
+    return user;
+  }
+
+  @override
+  Future<void> loginUser(LoginCredentials params) async {
+    return firebaseAuthDataSource.loginUser(params);
+  }
+
+  @override
+  Future<void> logOutUser() async {
+    return firebaseAuthDataSource.logOutUser();
+  }
+
+  @override
+  Future<void> storeUserDetails(covariant UserAccountModel user) async {
+    return firebaseStoreDataSource.storeUserDetails(user);
+  }
+
+  @override
+  Stream<UserAccountModel?> getCurrentUser() {
+    return firebaseAuthDataSource.getCurrentUser().asyncMap((user) async {
+      if (user == null) return null;
+      final userModel = await firebaseStoreDataSource.getUserDetails(user.uid);
+      return UserAccountModel(
+        id: userModel?.id ?? '',
+        email: userModel?.email ?? '',
+        username: userModel?.username ?? '',
+        avatarPath: userModel?.avatarPath ?? '',
+      );
+    });
+  }
+}

@@ -1,23 +1,21 @@
-class Movie {
+import 'package:your_cinema/features/movies/domain/entities/show.dart';
+
+class Movie extends Show {
   const Movie({
-    required this.id,
-    required this.title,
-    required this.overview,
-    required this.posterPath,
-    required this.language,
-    required this.genreIds,
-    required this.releaseDate,
-    required this.voteAverage,
-    required this.voteCount,
+    required super.id,
+    required super.title,
+    required super.overview,
+    required super.posterPath,
+    required super.backdropPath,
+    required super.voteAverage,
+    required super.voteCount,
+    required super.releaseDate,
+    super.status,
+    super.producers,
+    super.homepage,
+    super.tagline,
+    this.runtime,
   });
 
-  final String id;
-  final String title;
-  final String overview;
-  final String posterPath;
-  final String language;
-  final List<int> genreIds;
-  final String releaseDate;
-  final double voteAverage;
-  final int voteCount;
+  final int? runtime;
 }
