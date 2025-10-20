@@ -4,7 +4,7 @@ import 'package:your_cinema/features/authentication/domain/repositories/users_re
 class LoginUsecase {
   final UsersRepository repository;
 
-  LoginUsecase(this.repository);
+  LoginUsecase({required this.repository});
 
   Future<void> call(LoginCredentials params) async {
     return repository.loginUser(params);

@@ -1,6 +1,10 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:your_cinema/core/constants/api_constants.dart';
+import 'package:your_cinema/features/movies/data/data_sources/tmdb_api.dart';
 import 'package:your_cinema/features/movies/data/models/producer_model.dart';
+import 'package:your_cinema/features/movies/data/repositories/movie_repository.dart';
 import 'package:your_cinema/features/movies/domain/entities/movie.dart';
+import 'package:your_cinema/features/movies/domain/repositories/movie_repository.dart';
 
 class MovieModel extends Movie {
   const MovieModel({
@@ -47,3 +51,8 @@ class MovieModel extends Movie {
     }
   }
 }
+
+final movieRepositoryProvider = Provider<MovieRepository>((ref) {
+  final api = ref.read(tmdbApiProvider);
+  return MovieRepositoryImpl(api: api);
+});

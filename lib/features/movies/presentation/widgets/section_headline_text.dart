@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:your_cinema/core/theme/text_styles.dart';
 
 class SectionHeadlineText extends StatelessWidget {
   const SectionHeadlineText({super.key, required this.text});
@@ -8,13 +10,8 @@ class SectionHeadlineText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 8),
-      child: Text(
-        text,
-        style: Theme.of(
-          context,
-        ).textTheme.titleMedium!.copyWith(color: Colors.white),
-      ),
+      padding: EdgeInsets.only(left: 8.w),
+      child: Text(text, style: TextStyles.font24RegulerWhite),
     );
   }
 }

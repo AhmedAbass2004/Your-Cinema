@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:your_cinema/core/theme/app_theme.dart';
 import 'package:your_cinema/features/movies/presentation/screens/home_page.dart';
 
@@ -7,6 +8,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: theme, home: const HomePage());
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      child: MaterialApp(theme: theme, home: const HomePage()),
+    );
   }
 }
