@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
 import 'package:your_cinema/core/constants/api_constants.dart';
 import 'package:your_cinema/features/movies/data/models/movie_model.dart';
@@ -48,3 +49,7 @@ class TmdbApi {
     }
   }
 }
+
+final tmdbApiProvider = Provider<TmdbApi>((ref) {
+  return TmdbApi();
+});

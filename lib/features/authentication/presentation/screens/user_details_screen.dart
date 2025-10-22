@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:your_cinema/core/theme/text_styles.dart';
 import 'package:your_cinema/features/authentication/domain/entities/user_account.dart';
 
 class UserDetailsScreen extends StatelessWidget {
@@ -21,28 +23,21 @@ class UserDetailsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CircleAvatar(
-              radius: 80,
+              radius: 80.r,
               backgroundImage: AssetImage(
                 user.avatarPath ?? 'assets/user_avatars/user_avatar_0.jpg',
               ),
             ),
             SizedBox(height: 16),
-            Text(
-              user.username,
-              style: const TextStyle(fontSize: 16, color: Colors.white),
-            ),
             const SizedBox(height: 8),
             ListTile(
               leading: const Icon(Icons.email),
-              title: Text(
-                'Email: ${user.email}',
-                style: const TextStyle(fontSize: 16),
-              ),
+              title: Text(user.email, style: TextStyles.font16RegulerWhite),
             ),
 
             ListTile(
               leading: const Icon(Icons.bookmark),
-              title: Text('Watch List', style: const TextStyle(fontSize: 16)),
+              title: Text('Watch List', style: TextStyles.font16RegulerWhite),
             ),
 
             const SizedBox(height: 8),
